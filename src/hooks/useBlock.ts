@@ -6,7 +6,7 @@ interface useBlockArgs {
   block?: boolean
 }
 
-let LEAVE: UnregisterCallback
+let BLOCK: UnregisterCallback
 
 export default function useBlock(args: useBlockArgs) {
   const history = useHistory()
@@ -22,7 +22,7 @@ export default function useBlock(args: useBlockArgs) {
   useEffect(() => {
     if (block === false) return
     window.addEventListener('beforeunload', preventCloseAndRefresh)
-    LEAVE = history.block(() => {
+    BLOCK = history.block(() => {
       const leave = window.confirm('Leave this page?')
       if (!leave) {
         return false
@@ -32,7 +32,7 @@ export default function useBlock(args: useBlockArgs) {
 
     return () => {
       window.removeEventListener('beforeunload', preventCloseAndRefresh)
-      LEAVE()
+      BLOCK()
     }
   }, [block])
 }
