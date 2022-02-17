@@ -19,7 +19,9 @@ module.exports = {
   devServer: {
     host: HOST,
     port: PORT,
+    open: true,
     hot: true,
+    historyApiFallback: true
   },
   module: {
     rules: [
